@@ -3,17 +3,28 @@ var questionEl = document.getElementById('question');
 var startEl = document.getElementById('start');
 var startbutEl = document.getElementById('startbut');
 var answersEl = document.getElementById('answers');
+var responseEl = document.getElementById('response');
 
 startEl.textContent = 'Hey this is the start of the game 2!'
 
-// startEl.setAttribute('style', "display:inline");
-// startbutEl.setAttribute('style', "display:inline");
+startEl.setAttribute('style', "display:inline");
+startbutEl.setAttribute('style', "display:inline");
 // questionEl.setAttribute('style', "display:inline");
 // answersEl.setAttribute('style', "display:inline");
+// responseEl.setAttribute('style', "display:inline");
+
+startbutEl.addEventListener("click", function() {
+    startEl.setAttribute('style', "display:none");
+    startbutEl.setAttribute('style', "display:none");
+    countdown();
+    questionEl.setAttribute('style', "display:inline");
+    answersEl.setAttribute('style', "display:inline");
+  });
+
 
 
 function countdown() {
-  var timeLeft = 5;
+  var timeLeft = 60;
 
   // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
   var timeInterval = setInterval(function () {
@@ -51,4 +62,3 @@ function displayMessage() {
   }, 1000);
 }
 
-countdown();
