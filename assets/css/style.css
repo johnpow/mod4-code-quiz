@@ -6,6 +6,10 @@ button {
     background-color: #247BA0;
     color: white;
   }
+
+h2 {
+    font-size: 200%;
+}
   
 .container {
     text-align: center;
@@ -34,18 +38,9 @@ button {
   .welcome {
     margin-bottom: 20px;
   }
-  
-  #main {
-    margin-bottom: 20px;
-    font-size: 100px;
-    width: 100%;
-    height: 25px;
-  }
-  
-  #read {
-    margin: auto;
-    padding: 10px;
-    width: 100%;
-    height: 25px;
-  }
-  
+
+#startbut {
+    width: 30%;
+    align-self: center;
+}
+
