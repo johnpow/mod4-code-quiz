@@ -19,13 +19,14 @@ startbutEl.setAttribute('style', "display:inline");
 
 
 let round = 0;
+let replay = 0;
 
 startbutEl.addEventListener("click", function () {
     startEl.setAttribute('style', "display:none");
     startbutEl.setAttribute('style', "display:none");
     countdown();
     askQuestion(round);
-
+    console.log(replay);
 });
 
 
@@ -61,35 +62,45 @@ if (i<myQuestions.length) {
     buttcEl.textContent = `c: ${myQuestions[i].choices[2]}`;
     buttdEl.textContent = `d: ${myQuestions[i].choices[3]}`;
     solution = myQuestions[i].correctAnswer;
-    
+    if (i===0 && replay===0) {
     buttaEl.addEventListener("click", function () {
         if (solution === 0) {
             console.log('hurray0');
-            return askQuestion(i+1);
+            round++;
+            return askQuestion(round);
         } else {
             console.log('boo0');
             timeLeft -= 15;
-            return askQuestion(i+1);
+            round++;
+            return askQuestion(round);
         }
         });
              
     buttbEl.addEventListener("click", function () {
         if (solution === 1) {
             console.log('hurray1');
-            return askQuestion(i+1);
+            round++;
+            return askQuestion(round);
 
         } else {
             console.log('boo1');
             timeLeft -= 15;
-            return askQuestion(i+1);
+            round++;
+            return askQuestion(round);
         }
         })
-    } else {
-        startEl.textContent = 'Game Over!'
+    }}  else {
+        startEl.textContent = `Game Over! Score ${timeLeft}` 
+        timerEl.textContent = '';
         startEl.setAttribute('style', "display:inline");
         questionEl.setAttribute('style', "display:none");
         answersEl.setAttribute('style', "display:none");
         clearInterval(timeInterval);
+        startbutEl.textContent = 'Play Again'
+        startbutEl.setAttribute('style', "display:inline");
+        replay = 1;
+        round = 0;
+        timeLeft = 60;
     return;
     }
 };
@@ -99,7 +110,7 @@ let timeInterval;
 function countdown() {
     
     // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    let timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         
         timeLeft--;
         timerEl.textContent = `Timer: ${timeLeft}`;
@@ -113,5 +124,4 @@ function countdown() {
 // while (i<myQuestions.length) {
 //     askQuestion(i);
 // }
-
 
