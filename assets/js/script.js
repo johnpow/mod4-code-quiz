@@ -9,7 +9,7 @@ var buttcEl = document.getElementById('buttc');
 var buttdEl = document.getElementById('buttd');
 var responseEl = document.getElementById('response');
 
-startEl.textContent = 'Hey this is the start of the game 2!'
+startEl.textContent = 'Test your luck at the hardest game in the world!'
 
 startEl.setAttribute('style', "display:inline");
 startbutEl.setAttribute('style', "display:inline");
@@ -26,102 +26,145 @@ startbutEl.addEventListener("click", function () {
     startbutEl.setAttribute('style', "display:none");
     countdown();
     askQuestion(round);
-    console.log(replay);
 });
 
 
 const myQuestions = [
     {
         question: 'What color is the sky generally?',
-        choices: ['blue', 'black', 'green', 'red orange'],
+        choices: ['blue', 'black', 'green', 'red'],
         correctAnswer: 0,
     },
     {
         question: 'What color is the sky on a rainy day?',
-        choices: ['blue', 'black', 'green', 'red orange'],
+        choices: ['blue', 'black', 'green', 'red'],
         correctAnswer: 1,
     },
     {
-        question: 'What color is the sky at night when sailors delight?',
-        choices: ['blue', 'red orange','black', 'green' ],
-        correctAnswer: 1,
+        question: 'What color is the sky at night when it\'s sailors delight?',
+        choices: ['blue', 'black', 'green', 'red'],
+        correctAnswer: 3,
+    },
+    {
+        question: 'What color is the sky at night when there are tornados?',
+        choices: ['blue', 'black', 'green', 'red'],
+        correctAnswer: 2,
     },
 ]
 
-
 // const buttons = [buttaEl,buttbEl,buttcEl,buttdEl]
-const askQuestion = function(i) {
+const askQuestion = function (i) {
 
-if (i<myQuestions.length) {
-    questionEl.setAttribute('style', "display:inline");
-    answersEl.setAttribute('style', "display:inline");
+    if (i < myQuestions.length) {
+        questionEl.setAttribute('style', "display:inline");
+        answersEl.setAttribute('style', "display:inline");
 
-    questionEl.textContent = `${i + 1}: ${myQuestions[i].question}`;
-    buttaEl.textContent = `a: ${myQuestions[i].choices[0]}`;
-    buttbEl.textContent = `b: ${myQuestions[i].choices[1]}`;
-    buttcEl.textContent = `c: ${myQuestions[i].choices[2]}`;
-    buttdEl.textContent = `d: ${myQuestions[i].choices[3]}`;
-    solution = myQuestions[i].correctAnswer;
-    if (i===0 && replay===0) {
-    buttaEl.addEventListener("click", function () {
-        if (solution === 0) {
-            console.log('hurray0');
-            round++;
-            return askQuestion(round);
-        } else {
-            console.log('boo0');
-            timeLeft -= 15;
-            round++;
-            return askQuestion(round);
+        
+        questionEl.textContent = `${i + 1}: ${myQuestions[i].question}`;
+        buttaEl.textContent = `a: ${myQuestions[i].choices[0]}`;
+        buttbEl.textContent = `b: ${myQuestions[i].choices[1]}`;
+        buttcEl.textContent = `c: ${myQuestions[i].choices[2]}`;
+        buttdEl.textContent = `d: ${myQuestions[i].choices[3]}`;
+        solution = myQuestions[i].correctAnswer;
+        // i===0 makes sure the button listeners are only created on first questions, replay ===0 makes sure they are not created on replay
+        if (i === 0 && replay === 0) {
+            buttaEl.addEventListener("click", function () {
+                if (solution === 0) {
+                    console.log('hurray0');
+                    responseEl.textContent = "correct!"
+                    round++;
+                    return askQuestion(round);
+                } else {
+                    console.log('boo0');
+                    timeLeft -= 15;
+                    responseEl.textContent = "wrong!"
+                    responseEl.setAttribute('style', "display:inline");
+                    round++;
+                    return askQuestion(round);
+                }
+            });
+
+            buttbEl.addEventListener("click", function () {
+                if (solution === 1) {
+                    console.log('hurray1');
+                    round++;
+                    return askQuestion(round);
+
+                } else {
+                    console.log('boo1');
+                    timeLeft -= 15;
+                    round++;
+                    return askQuestion(round);
+                }
+            })
+
+            buttcEl.addEventListener("click", function () {
+                if (solution === 2) {
+                    console.log('hurray3');
+                    round++;
+                    return askQuestion(round);
+
+                } else {
+                    console.log('boo3');
+                    timeLeft -= 15;
+                    round++;
+                    return askQuestion(round);
+                }
+            })
+
+            buttdEl.addEventListener("click", function () {
+                if (solution === 3) {
+                    console.log('hurray4');
+                    round++;
+                    return askQuestion(round);
+
+                } else {
+                    console.log('boo4');
+                    timeLeft -= 15;
+                    round++;
+                    return askQuestion(round);
+                }
+            })
         }
-        });
-             
-    buttbEl.addEventListener("click", function () {
-        if (solution === 1) {
-            console.log('hurray1');
-            round++;
-            return askQuestion(round);
-
-        } else {
-            console.log('boo1');
-            timeLeft -= 15;
-            round++;
-            return askQuestion(round);
-        }
-        })
-    }}  else {
-        startEl.textContent = `Game Over! Score ${timeLeft}` 
-        timerEl.textContent = '';
-        startEl.setAttribute('style', "display:inline");
-        questionEl.setAttribute('style', "display:none");
-        answersEl.setAttribute('style', "display:none");
-        clearInterval(timeInterval);
-        startbutEl.textContent = 'Play Again'
-        startbutEl.setAttribute('style', "display:inline");
-        replay = 1;
-        round = 0;
-        timeLeft = 60;
-    return;
+    } else {
+        if (timeLeft <= 0) {
+            timeLeft = 0;
+            gameOver()
+        } else { gameOver() }
+        return;
     }
 };
 
 let timeLeft = 60;
 let timeInterval;
 function countdown() {
-    
+
     // TODO: Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
     timeInterval = setInterval(function () {
-        
+
         timeLeft--;
         timerEl.textContent = `Timer: ${timeLeft}`;
+
+        if (timeLeft <= 0) {
+            timeLeft = 0;
+            gameOver()
+        }
     }, 1000);
 
-    console.log(timeInterval)
-    
 };
 
-// let i = 0;
-// while (i<myQuestions.length) {
-//     askQuestion(i);
-// }
+const gameOver = function () {
+    startEl.textContent = `Game Over! Score ${timeLeft}`
+    timerEl.textContent = '';
+    startEl.setAttribute('style', "display:inline");
+    questionEl.setAttribute('style', "display:none");
+    answersEl.setAttribute('style', "display:none");
+    clearInterval(timeInterval);
+    startbutEl.textContent = 'Play Again'
+    startbutEl.setAttribute('style', "display:inline");
+    replay = 1;
+    round = 0;
+    timeLeft = 60;
+}
+
 
