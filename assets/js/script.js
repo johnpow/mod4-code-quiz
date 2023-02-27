@@ -32,22 +32,22 @@ startbutEl.addEventListener("click", function () {
 const myQuestions = [
     {
         question: 'What color is the sky generally?',
-        choices: ['blue', 'black', 'green', 'red'],
+        choices: ['blue', 'aqua', 'red', 'magenta'],
         correctAnswer: 0,
     },
     {
         question: 'What color is the sky on a rainy day?',
-        choices: ['blue', 'black', 'green', 'red'],
+        choices: ['red', 'grey', 'orange', 'pink'],
         correctAnswer: 1,
     },
     {
         question: 'What color is the sky at night when it\'s sailors delight?',
-        choices: ['blue', 'black', 'green', 'red'],
+        choices: ['blue', 'eggplant', 'purple', 'red'],
         correctAnswer: 3,
     },
     {
         question: 'What color is the sky at night when there are tornados?',
-        choices: ['blue', 'black', 'green', 'red'],
+        choices: ['black', 'orange', 'green', 'blue'],
         correctAnswer: 2,
     },
 ]
