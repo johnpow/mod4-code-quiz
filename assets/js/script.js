@@ -71,14 +71,11 @@ const askQuestion = function (i) {
             buttaEl.addEventListener("click", function () {
                 if (solution === 0) {
                     console.log('hurray0');
-                    responseEl.textContent = "correct!"
                     round++;
                     return askQuestion(round);
                 } else {
                     console.log('boo0');
                     timeLeft -= 15;
-                    responseEl.textContent = "wrong!"
-                    responseEl.setAttribute('style', "display:inline");
                     round++;
                     return askQuestion(round);
                 }
