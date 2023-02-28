@@ -1,46 +1,54 @@
 button {
-    padding: 1px;
-    margin: 1px;
-    cursor: pointer;
-    font-size: 24px;
-    background-color: #247BA0;
-    color: white;
-  }
+  padding: 1px;
+  margin: 1px;
+  cursor: pointer;
+  font-size: 24px;
+  background-color: #247BA0;
+  color: white;
+}
 
 h2 {
-    font-size: 200%;
+  font-size: 200%;
 }
-  
-.container {
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 50%;
-    height: 100px;
-  }
 
-#start, #startbut,#question,#response {
-    display:none;
-  }
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50%;
+  height: 100px;
+}
+
+#start, #startbut,#question,#response,#highscore-list,#highscore-form {
+  display:none;
+}
 
 #answers {
-    list-style-type: none;
-    text-align: left;
-    display:none;
-  }
+  list-style-type: none;
+  text-align: left;
+  display:none;
+}
 
 .hscd {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-  .welcome {
-    margin-bottom: 20px;
-  }
+.welcome {
+  margin-bottom: 20px;
+}
+
+body div ul > button {
+  width: 40%;
+  align-self: center;
+}
 
 #startbut {
-    width: 40%;
-    align-self: center;
+  width: 40%;
+  align-self: center;
 }
 
+#highscore-list {
+list-style-type:none;
+}

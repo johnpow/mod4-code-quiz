@@ -2,12 +2,20 @@ var timerEl = document.getElementById('countdown');
 var questionEl = document.getElementById('question');
 var startEl = document.getElementById('start');
 var startbutEl = document.getElementById('startbut');
+var scoresEl = document.getElementById('scores');
 var answersEl = document.getElementById('answers');
 var buttaEl = document.getElementById('butta');
 var buttbEl = document.getElementById('buttb');
 var buttcEl = document.getElementById('buttc');
 var buttdEl = document.getElementById('buttd');
 var responseEl = document.getElementById('response');
+var highscoreInput = document.querySelector("#highscore-text");
+var highscoreForm = document.querySelector("#highscore-form");
+var highscoreList = document.querySelector("#highscore-list");
+
+var highscores = [];
+
+
 
 startEl.textContent = 'Test your luck at the hardest game in the world!'
 
@@ -22,11 +30,27 @@ let round = 0;
 let replay = 0;
 
 startbutEl.addEventListener("click", function () {
+    timeLeft = 60;
     startEl.setAttribute('style', "display:none");
     startbutEl.setAttribute('style', "display:none");
+    highscoreForm.setAttribute('style', "display:none");
+    scoresEl.setAttribute('style', "visibility:hidden");
+    highscoreList.setAttribute('style', "display:none");
     countdown();
     askQuestion(round);
 });
+
+scoresEl.addEventListener("click", function () {
+    init();
+    gameOver();
+    startEl.textContent = 'Highscores'
+    highscoreList.setAttribute('style', "display:inline");
+    startbutEl.setAttribute('style', "display:none");
+    highscoreForm.setAttribute('style', "display:none");
+    startbutEl.textContent = 'Play Game'
+    startbutEl.setAttribute('style', "display:inline");
+});
+
 
 
 const myQuestions = [
@@ -151,17 +175,85 @@ function countdown() {
 };
 
 const gameOver = function () {
-    startEl.textContent = `Game Over! Score ${timeLeft}`
-    timerEl.textContent = '';
-    startEl.setAttribute('style', "display:inline");
     questionEl.setAttribute('style', "display:none");
     answersEl.setAttribute('style', "display:none");
+    startEl.textContent = `Game Over! Score ${timeLeft}`
+    timerEl.textContent = '';
+    init();
+    highscoreForm.setAttribute('style', "display:inline");
+    highscoreList.setAttribute('style', "display:none");
+    startEl.setAttribute('style', "display:inline");
     clearInterval(timeInterval);
     startbutEl.textContent = 'Play Again'
     startbutEl.setAttribute('style', "display:inline");
     replay = 1;
     round = 0;
-    timeLeft = 60;
+
+
 }
+
+function renderHighscores() {
+
+    highscoreList.innerHTML = "";
+
+    for (var i = 0; i < highscores.length; i++) {
+      var highscore = highscores[i];
+  
+      var li = document.createElement("li");
+      li.textContent = highscore;
+      li.setAttribute("data-index", i);
+  
+  
+      highscoreList.appendChild(li);
+    }
+    var button = document.createElement("button");
+    button.textContent = "Clear Scores";
+    highscoreList.appendChild(button);
+  }
+  
+  function init() {
+  
+    var storedHighscores = JSON.parse(localStorage.getItem("highscores"));
+  
+    if (storedHighscores !== null) {
+      highscores = storedHighscores;
+    }
+    renderHighscores();
+  }
+  
+  function storeHighscores() {
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+  }
+  
+  
+  highscoreForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    var highscoreText = highscoreInput.value.trim();
+  
+    if (highscoreText === "") {
+      return;
+    }
+  
+    highscores.push(highscoreText +' Score: '+timeLeft);
+    highscoreInput.value = "";
+   
+    storeHighscores();
+    renderHighscores();
+    highscoreForm.setAttribute('style', "display:none");
+    startEl.textContent = 'Highscores'
+    highscoreList.setAttribute('style', "display:inline");
+  });
+  
+  
+  highscoreList.addEventListener("click", function(event) {
+    var element = event.target;
+  
+    if (element.matches("button") === true) {
+      highscores = [];
+  
+      storeHighscores();
+      renderHighscores();
+    }
+  });
 
 

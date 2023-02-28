@@ -11,7 +11,7 @@
 
 <header>
     <div class = "hscd">
-        <h3>View Highscores</h3>
+        <h3 id="scores">View Highscores</h3>
         <h3 id="countdown"></h3>
     </div>  
 </header>
@@ -19,8 +19,16 @@
 <body>
 
     <div class="container">
-        <h1 id="start"></h1>
-        <button id="startbut">Start Quiz</button>
+        <h1 id="start"></h1>    
+        <form id="highscore-form" method="POST">
+            <label for="highscore-text">Add your score to the record board! </label>
+            <input type="text" placeholder="Enter initials" name="highscore-text" id="highscore-text" />
+            <input type="submit" label="Submit" />
+        </form>
+        <div>
+            <ul id="highscore-list"></ul>
+            <button id="startbut">Start Quiz</button>
+        </div>
         <h2 id="question"></h2>
         <ul id="answers">
             <li><button id="butta"></button></li>
@@ -28,6 +36,7 @@
             <li><button id="buttc">c</button></li>
             <li><button id="buttd"></button></li>
         </ul>
+
         <h3 id="response">This is your result</h3>
     </div>
     <script src="./assets/js/script.js"></script>
