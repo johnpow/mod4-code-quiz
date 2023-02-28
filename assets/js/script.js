@@ -42,7 +42,7 @@ startbutEl.addEventListener("click", function () {
 
 scoresEl.addEventListener("click", function () {
     init();
-    gameOver();
+    gameHide();
     startEl.textContent = 'Highscores'
     highscoreList.setAttribute('style', "display:inline");
     startbutEl.setAttribute('style', "display:none");
@@ -51,6 +51,12 @@ scoresEl.addEventListener("click", function () {
     startbutEl.setAttribute('style', "display:inline");
 });
 
+const gameHide = function () {
+    startEl.setAttribute('style', "display:inline");
+    clearInterval(timeInterval);
+    startbutEl.textContent = 'Play Again'
+    startbutEl.setAttribute('style', "display:inline");
+}
 
 
 const myQuestions = [
@@ -188,9 +194,9 @@ const gameOver = function () {
     startbutEl.setAttribute('style', "display:inline");
     replay = 1;
     round = 0;
-
-
 }
+
+
 
 function renderHighscores() {
 
